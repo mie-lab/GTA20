@@ -94,7 +94,6 @@ def plot_cluster(data, labels, core_sample_indices, proj_wgs84, proj_target, bac
     
         img = mpimg.imread("background_rome.png")
         plt.imshow(img, extent=[xmin, xmax, ymin, ymax], zorder=0)
-        print(xmax - xmin, ymax - ymin)
             
     X = np.array(data)
 
