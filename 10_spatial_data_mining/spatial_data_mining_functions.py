@@ -136,15 +136,18 @@ def plot_cluster_interactive(data, labels, core_samples_indices, proj_wgs84, pro
     m = Map(center=(41.89, 12.46), zoom=11, basemap=basemaps.OpenStreetMap.Mapnik)    
     transformer = pyproj.Transformer.from_crs(proj_target, proj_wgs84)
 
+    unique_labels = list(set(labels))
+    colors = {ul: f"hsla({str(np.random.choice(range(360)))}, 100%, 50%, 1)" for ul in unique_labels}
+    colors[-1] = 'rgba(60, 60, 60, 1)'
     for i in range(len(data)):
         pt = data[i]
-        label = labels[i]
+        color = colors[labels[i]]
         mark = Circle(location=transformer.transform(*pt[0:2]), radius=100, fill_opacity=1.0, 
-                    color='rgba(60, 60, 60, 1)', stroke=False)    
+                    color=color, stroke=False)    
         m += mark
         
     for i in core_samples_indices:
-        color = f"hsla({str(np.random.choice(range(360)))}, 100%, 50%, 1)"
+        color = colors[labels[i]]
         mark = Circle(location=transformer.transform(*data[i, 0:2]), radius=500, fill_opacity=0.5, 
                       color=color, stroke=False)
         m += mark
