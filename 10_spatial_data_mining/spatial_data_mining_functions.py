@@ -11,6 +11,11 @@ import shapely.wkt as wkt
 import geopandas as gpd
 import pyproj
 
+try:
+    from ipyleaflet import *
+except:
+    print('ipyleaflet library not available. You will have to use static plotting.')
+
 
 def read_data(input_file, nrows=None):
     """Function to read the Rome / taxi dataset.
@@ -74,12 +79,12 @@ def plot_nb_dists(X, nearest_neighbor, metric='euclidean', ylim=None):
     plt.show()
 
 
-def plot_cluster(data, labels, core_sample_indices, proj_wgs84, proj_target, background=True, linestyle="solid"):
+def plot_cluster(data, labels, core_samples_indices, proj_wgs84, proj_target, background=True, linestyle="solid"):
     """ Function derived from scipy dbscan example
     http://scikit-learn.org/stable/auto_examples/cluster/plot_dbscan.html#example-cluster-plot-dbscan-py.
     """
     core_samples_mask = np.zeros_like(labels, dtype=bool)
-    core_samples_mask[core_sample_indices] = True
+    core_samples_mask[core_samples_indices] = True
 
     plt.figure(figsize=(16, 11.537))
     if background:
@@ -124,6 +129,27 @@ def plot_cluster(data, labels, core_sample_indices, proj_wgs84, proj_target, bac
 
     plt.title('Estimated number of clusters: %d' % n_clusters_)
     plt.show()
+
+
+def plot_cluster_interactive(data, labels, core_samples_indices, proj_wgs84, proj_target):
+    """Plots the output of the previously applied method onto an interactive map."""
+    m = Map(center=(41.89, 12.46), zoom=11, basemap=basemaps.OpenStreetMap.Mapnik)    
+    transformer = pyproj.Transformer.from_crs(proj_target, proj_wgs84)
+
+    for i in range(len(data)):
+        pt = data[i]
+        label = labels[i]
+        mark = Circle(location=transformer.transform(*pt[0:2]), radius=100, fill_opacity=1.0, 
+                    color='rgba(60, 60, 60, 1)', stroke=False)    
+        m += mark
+        
+    for i in core_samples_indices:
+        color = f"hsla({str(np.random.choice(range(360)))}, 100%, 50%, 1)"
+        mark = Circle(location=transformer.transform(*data[i, 0:2]), radius=500, fill_opacity=0.5, 
+                      color=color, stroke=False)
+        m += mark
+    
+    return m
     
 
 def export_to_shp(data, labels, export_layer_name, crs):
