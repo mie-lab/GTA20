@@ -20,3 +20,8 @@ Die resultierenden "triplegs" können dann auf verschiedene Arten weitergehend a
 
 Schlussendlich werden weitere Kontextdaten verwendet, um in Kombination mit den Bewegungsdaten aussagen über die Transportmittel oder den exakten Weg zu machen.
 
+## Wichtiges
+
+Die Installation von `pyrosm` hat lange nicht funktioniert. 
+Der Trick ist, `pyrosm` zu klonen, im `setup.py` die `setup_requirements` auf `setuptools` zu beschränken und dann alles mit `pip install -e .` zu installieren. 
+Auf Linux (myBinder) geht das hoffentlich einfacher.
