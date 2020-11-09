@@ -15,10 +15,13 @@ In dieser Übung geht es darum, mittels Clustering-Methoden Stoppunkte in GPS-Tr
 Basierend auf Übung 10 werden hier die Bewegungsdaten anhand der Stoppunkte aufgeteilt.
 Die resultierenden "triplegs" können dann auf verschiedene Arten weitergehend analysiert werden.
 
+[Aufgabe](https://mybinder.org/v2/gh/mie-lab/GTA20/master?filepath=11_analyse_von_bewegungsdaten_1%2F11_analyse_von_bewegungsdaten_1_main.ipynb) / [Lösung](https://mybinder.org/v2/gh/mie-lab/GTA20/master?filepath=11_analyse_von_bewegungsdaten_1%2F11_analyse_von_bewegungsdaten_1_solution.ipynb)
 
 ## Übung 12: Analyse von Bewegungsdaten 2
 
 Schlussendlich werden weitere Kontextdaten verwendet, um in Kombination mit den Bewegungsdaten aussagen über die Transportmittel oder den exakten Weg zu machen.
+
+[Aufgabe](https://mybinder.org/v2/gh/mie-lab/GTA20/master?filepath=12_analyse_von_bewegungsdaten_2%2F12_analyse_von_bewegungsdaten_2_main.ipynb) / [Lösung](https://mybinder.org/v2/gh/mie-lab/GTA20/master?filepath=12_analyse_von_bewegungsdaten_2%2F12_analyse_von_bewegungsdaten_2_solution.ipynb)
 
 ## Wichtiges
 
